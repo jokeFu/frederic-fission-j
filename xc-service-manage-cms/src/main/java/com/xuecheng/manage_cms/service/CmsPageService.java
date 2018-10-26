@@ -2,10 +2,14 @@ package com.xuecheng.manage_cms.service;
 
 import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
+import com.xuecheng.framework.domain.cms.response.CmsCode;
+import com.xuecheng.framework.domain.cms.response.CmsPageResult;
+import com.xuecheng.framework.exception.ExceptionCast;
 import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.QueryResult;
 import com.xuecheng.manage_cms.dao.CmsPageRepository;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -38,8 +42,14 @@ public class CmsPageService {
 
         //可以按照条件查询
         CmsPage cmsPage = new CmsPage();
-        cmsPage.setPageAliase("页面");
-        cmsPage.setSiteId("5a751fab6abb5044e0d19ea1");
+
+        if (StringUtils.isNotEmpty(queryPageRequest.getSiteId())) {
+            cmsPage.setSiteId(queryPageRequest.getSiteId());
+        }
+
+        if (StringUtils.isNotEmpty(queryPageRequest.getPageAliase())) {
+            cmsPage.setPageAliase(queryPageRequest.getPageAliase());
+        }
 
         Example<CmsPage> of = Example.of(cmsPage, pageAliase);
 
@@ -60,4 +70,28 @@ public class CmsPageService {
         return new QueryResponseResult(CommonCode.SUCCESS, queryResult);
     }
 
+    //新增页面
+    public CmsPageResult add(CmsPage cmsPage) {
+        if (cmsPage == null) {
+            //证明有问题 要抛异常的
+        }
+
+        CmsPage cmsPage1 = cmsPageRepository.findBySiteIdAndPageNameAndPageWebPath(cmsPage.getSiteId(), cmsPage.getPageName(), cmsPage.getPageWebPath());
+
+        if (cmsPage1 != null) {
+            //抛出具体的异常。。
+            ExceptionCast.cast(CmsCode.CMS_ADDPAGE_EXISTS);
+        }
+        int i= 1 / 0;
+
+        cmsPage.setPageId(null);
+
+        CmsPage save = cmsPageRepository.save(cmsPage);
+
+        if (save != null) {
+            return new CmsPageResult(CommonCode.SUCCESS, save);
+        }
+        return new CmsPageResult(CommonCode.FAIL, null);
+
+    }
 }
