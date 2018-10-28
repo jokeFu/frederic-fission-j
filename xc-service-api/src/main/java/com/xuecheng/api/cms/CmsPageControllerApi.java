@@ -9,10 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 @Api(value="cms页面管理的接口",description="cms页面管理的接口，提供页面添加、删除、修改、查询操作")
 public interface CmsPageControllerApi {
@@ -28,4 +25,13 @@ public interface CmsPageControllerApi {
 
     @PostMapping(API_PRE + "/add")
     public CmsPageResult add(@RequestBody CmsPage cmsPage);
+
+    @ApiOperation("通过id进行查询")
+    @GetMapping(API_PRE + "/get/{id}")
+    public CmsPageResult findById(@PathVariable("id") String id);
+
+    @ApiOperation("修改页面")
+    @PutMapping(API_PRE + "/edit/{id}")
+    public CmsPageResult edit(@PathVariable("id") String id, @RequestBody CmsPage cmsPage);
+
 }

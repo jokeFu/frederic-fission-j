@@ -8,6 +8,7 @@ import com.xuecheng.framework.exception.ExceptionCast;
 import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.QueryResult;
+import com.xuecheng.framework.model.response.ResultCode;
 import com.xuecheng.manage_cms.dao.CmsPageRepository;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,7 +83,7 @@ public class CmsPageService {
             //抛出具体的异常。。
             ExceptionCast.cast(CmsCode.CMS_ADDPAGE_EXISTS);
         }
-        int i= 1 / 0;
+     //   int i= 1 / 0;
 
         cmsPage.setPageId(null);
 
@@ -93,5 +94,35 @@ public class CmsPageService {
         }
         return new CmsPageResult(CommonCode.FAIL, null);
 
+    }
+
+    public CmsPageResult findById(String id) {
+        CmsPage one = cmsPageRepository.findOne(id);
+        if (one != null) {
+            return new CmsPageResult(CommonCode.SUCCESS, one);
+        }
+        return new CmsPageResult(CommonCode.FAIL, null);
+    }
+
+    public CmsPageResult edit(String id, CmsPage cmsPage) {
+
+        CmsPage one = cmsPageRepository.findOne(id);
+        if (one != null) {
+              one.setPageAliase(cmsPage.getPageAliase());
+              one.setSiteId(cmsPage.getSiteId());
+              one.setPagePhysicalPath(cmsPage.getPagePhysicalPath());
+              one.setPageWebPath(cmsPage.getPageWebPath());
+              one.setPageName(cmsPage.getPageName());
+              one.setTemplateId(cmsPage.getTemplateId());
+            CmsPage save = cmsPageRepository.save(one);
+            if (save != null) {
+                //返回成功
+                return new CmsPageResult(CommonCode.SUCCESS, save);
+            }
+
+
+        }
+
+        return new CmsPageResult(CommonCode.FAIL, null);
     }
 }
