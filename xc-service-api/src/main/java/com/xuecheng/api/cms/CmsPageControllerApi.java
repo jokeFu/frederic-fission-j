@@ -4,12 +4,15 @@ package com.xuecheng.api.cms;
 import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
+import com.xuecheng.framework.domain.cms.response.GenerateHtmlResult;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @Api(value="cms页面管理的接口",description="cms页面管理的接口，提供页面添加、删除、修改、查询操作")
 public interface CmsPageControllerApi {
@@ -33,5 +36,15 @@ public interface CmsPageControllerApi {
     @ApiOperation("修改页面")
     @PutMapping(API_PRE + "/edit/{id}")
     public CmsPageResult edit(@PathVariable("id") String id, @RequestBody CmsPage cmsPage);
+
+    @PostMapping(API_PRE + "generateHtml/{pageId}")
+    @ApiOperation("生成静态页面")
+    public GenerateHtmlResult generateHtml(@PathVariable("pageId") String pageId) throws IOException;
+
+
+    @GetMapping(API_PRE + "/getHtml")
+    @ApiOperation("查询静态页面")
+    public GenerateHtmlResult getHtml(@PathVariable("pageId") String pageId) throws IOException;
+
 
 }
