@@ -234,7 +234,6 @@ public class CmsPageService {
         CmsTemplate one = cmsTemplateRepository.findOne(templateId);
 
         if (one == null) {
-
             return null;
         }
 

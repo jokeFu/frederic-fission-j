@@ -37,12 +37,12 @@ public interface CmsPageControllerApi {
     @PutMapping(API_PRE + "/edit/{id}")
     public CmsPageResult edit(@PathVariable("id") String id, @RequestBody CmsPage cmsPage);
 
-    @PostMapping(API_PRE + "generateHtml/{pageId}")
+    @PostMapping(API_PRE + "/generateHtml/{pageId}")
     @ApiOperation("生成静态页面")
     public GenerateHtmlResult generateHtml(@PathVariable("pageId") String pageId) throws IOException;
 
 
-    @GetMapping(API_PRE + "/getHtml")
+    @GetMapping(API_PRE + "/getHtml/{pageId}")
     @ApiOperation("查询静态页面")
     public GenerateHtmlResult getHtml(@PathVariable("pageId") String pageId) throws IOException;
 
