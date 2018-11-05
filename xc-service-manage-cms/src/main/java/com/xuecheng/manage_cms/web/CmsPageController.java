@@ -6,6 +6,7 @@ import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
 import com.xuecheng.framework.domain.cms.response.GenerateHtmlResult;
 import com.xuecheng.framework.model.response.QueryResponseResult;
+import com.xuecheng.framework.model.response.ResponseResult;
 import com.xuecheng.manage_cms.service.CmsPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,6 +55,12 @@ public class CmsPageController implements CmsPageControllerApi {
     @Override
     public GenerateHtmlResult getHtml(@PathVariable("pageId") String pageId) throws IOException {
         return cmsPageService.getHtml(pageId);
+    }
+
+    @Override
+    public ResponseResult postPage(@PathVariable("pageId") String pageId) {
+
+        return cmsPageService.postpage(pageId);
     }
 
 }

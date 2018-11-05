@@ -6,6 +6,7 @@ import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
 import com.xuecheng.framework.domain.cms.response.GenerateHtmlResult;
 import com.xuecheng.framework.model.response.QueryResponseResult;
+import com.xuecheng.framework.model.response.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -47,4 +48,7 @@ public interface CmsPageControllerApi {
     public GenerateHtmlResult getHtml(@PathVariable("pageId") String pageId) throws IOException;
 
 
+    @ApiOperation(value = "页面发布")
+    @PostMapping(API_PRE + "/postPage/{pageId}")
+    public ResponseResult postPage(@PathVariable("pageId") String pageId);
 }
