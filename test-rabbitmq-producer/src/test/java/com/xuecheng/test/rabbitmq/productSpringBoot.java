@@ -15,10 +15,10 @@ public class productSpringBoot {
 
     @Autowired
     RabbitTemplate rabbitTemplate;
-    //
+
     @Test
     public void send_email() {
-        String message = "send email message" +System.currentTimeMillis() ;
+        String message = "send email message" ;
 
        // rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_TOPICS_INFORM,"inform.email",message);
         rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_TOPICS_INFORM,"inform.email",message);
