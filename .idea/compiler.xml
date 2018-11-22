@@ -14,7 +14,6 @@
         <module name="xc-framework-utils" />
         <module name="xc-service-api" />
         <module name="xc-service-manage-cms" />
-        <module name="xc-service-manage-cms-client" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
