@@ -14,6 +14,6 @@ public interface CmsConfigControllerApi {
     @GetMapping(API_PRE + "/getmodel/{id}")
     public CmsConfigResult getmodel(@PathVariable("id") String id);
 
-    @GetMapping(API_PRE + "")
-    public void test(@PathVariable("id") String id);
+//    @GetMapping(API_PRE + "")
+//    public void test(@PathVariable("id") String id);
 }

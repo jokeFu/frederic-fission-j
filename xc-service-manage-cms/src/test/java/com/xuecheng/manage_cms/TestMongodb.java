@@ -25,22 +25,23 @@ public class TestMongodb  {
     @Test
     public void testFindList() {
 
-        CmsPage one = cmsPageRepository.findOne("5ad92e9068db52404cad0f79");
-        System.out.println(one);
+////        CmsPage one = cmsPageRepository.findOne("5ad92e9068db52404cad0f79");
+//        CmsPage one = cmsPageRepository.findByPageName("297e7c7c62b888f00162b8a965510001.html");
+//        System.out.println(one);
 
-//        ExampleMatcher pageAliase = ExampleMatcher.matching().withMatcher("pageAliase", ExampleMatcher.GenericPropertyMatchers.contains());
-//
-//        CmsPage cmsPage = new CmsPage();
-//
-//        cmsPage.setPageAliase("页面");
-//        Example<CmsPage> of = Example.of(cmsPage, pageAliase);
-//        int page = 0;
-//        int size = 10;
-//        PageRequest pageRequest = new PageRequest(page, size);
-//
-//        Page<CmsPage> all = cmsPageRepository.findAll(of, pageRequest);
-//        List<CmsPage> content = all.getContent();
-//        System.out.println(content);
+        ExampleMatcher pageAliase = ExampleMatcher.matching().withMatcher("pageAliase", ExampleMatcher.GenericPropertyMatchers.contains());
+
+        CmsPage cmsPage = new CmsPage();
+
+        cmsPage.setPageAliase("页面");
+        Example<CmsPage> of = Example.of(cmsPage, pageAliase);
+        int page = 0;
+        int size = 10;
+        PageRequest pageRequest = new PageRequest(page, size);
+
+        Page<CmsPage> all = cmsPageRepository.findAll(of, pageRequest);
+        List<CmsPage> content = all.getContent();
+        System.out.println(content);
 
 
     }
