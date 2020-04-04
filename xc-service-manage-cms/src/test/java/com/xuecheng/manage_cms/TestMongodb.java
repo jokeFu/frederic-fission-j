@@ -2,7 +2,11 @@ package com.xuecheng.manage_cms;
 
 
 import com.xuecheng.framework.domain.cms.CmsPage;
+import com.xuecheng.framework.domain.cms.CmsSite;
+import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.manage_cms.dao.CmsPageRepository;
+import com.xuecheng.manage_cms.dao.CmsSiteRepository;
+import com.xuecheng.manage_cms.service.CmsSiteService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +25,8 @@ public class TestMongodb  {
 
     @Autowired
     CmsPageRepository cmsPageRepository;
+    @Autowired
+    CmsSiteService cmsSiteService;
 
     @Test
     public void testFindList() {
@@ -46,6 +52,12 @@ public class TestMongodb  {
 
     }
 
+    @Test
+    public void TestCmsSiteFindAll() {
+        QueryResponseResult all = cmsSiteService.findAll();
+        System.out.println(all);
+
+    }
 
 
 }
